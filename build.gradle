@@ -1,5 +1,15 @@
 apply plugin: 'idea'
-apply plugin: 'jetty'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+buildscript {
+    repositories {
+		jcenter()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -7,12 +17,14 @@ repositories {
 
 
 dependencies {
-    compile 'org.springframework:spring-webmvc:4.0.6.RELEASE'
-    providedCompile 'javax.servlet:servlet-api:2.5'
+    compile 'org.springframework:spring-webmvc:4.3.9.RELEASE'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
+    gradleVersion = '4.0'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
